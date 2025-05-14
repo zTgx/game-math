@@ -14,6 +14,9 @@ A header-only C++ library for game mathematics, providing commonly used data str
 ## Dependencies
 
 -   Eigen: Used for matrix and vector operations.
+```shell
+sudo apt install libeigen3-dev # linux
+```
 
 ## Usage
 
