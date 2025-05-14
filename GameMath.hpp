@@ -114,6 +114,8 @@ public:
     
     // 静态方法
     static Vector<T, N> zero() { return Vector<T, N>(Eigen::Matrix<T, N, 1>::Zero()); }
+    static Vector<T, N> unit() { return Vector<T, N>(Eigen::Matrix<T, N, 1>::Unit()); }
+    static Vector<T, N> random() { return Vector<T, N>(Eigen::Matrix<T, N, 1>::Random()); }
 };
 
 // 常用向量类型别名
@@ -132,27 +134,37 @@ using Vector4i = Vector<int, 4>;
  ******************************/
 template<typename T>
 Matrix<T> rotate_90_clockwise(const Matrix<T>& mat) {
-    return Matrix<T>(mat.eigen().transpose().rowwise().reverse());
+    Matrix<T> result(mat.cols(), mat.rows()); // Create a new matrix with transposed dimensions
+    result.eigen() = mat.eigen().transpose().rowwise().reverse();
+    return result;
 }
 
 template<typename T>
 Matrix<T> rotate_90_counterclockwise(const Matrix<T>& mat) {
-    return Matrix<T>(mat.eigen().transpose().colwise().reverse());
+    Matrix<T> result(mat.cols(), mat.rows());
+    result.eigen() = mat.eigen().transpose().colwise().reverse();
+    return result;
 }
 
 template<typename T>
 Matrix<T> rotate_180(const Matrix<T>& mat) {
-    return Matrix<T>(mat.eigen().reverse());
+    Matrix<T> result(mat.rows(), mat.cols());
+    result.eigen() = mat.eigen().reverse();
+    return result;
 }
 
 template<typename T>
 Matrix<T> flip_horizontal(const Matrix<T>& mat) {
-    return Matrix<T>(mat.eigen().rowwise().reverse());
+    Matrix<T> result(mat.rows(), mat.cols());
+    result.eigen() = mat.eigen().rowwise().reverse();
+    return result;
 }
 
 template<typename T>
 Matrix<T> flip_vertical(const Matrix<T>& mat) {
-    return Matrix<T>(mat.eigen().colwise().reverse());
+    Matrix<T> result(mat.rows(), mat.cols());
+    result.eigen() = mat.eigen().colwise().reverse();
+    return result;
 }
 
 /******************************
