@@ -1,6 +1,10 @@
 cmake_minimum_required(VERSION 3.10)
 project(GameMath)
 
+# Set the C++ standard
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
 add_library(GameMath INTERFACE)
 target_include_directories(GameMath INTERFACE 
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
@@ -12,7 +16,8 @@ if(BUILD_TESTS)
     add_subdirectory(tests)
 endif()
 
-option(BUILD_EXAMPLES "Build examples" ON)
-if(BUILD_EXAMPLES)
-    add_subdirectory(examples)
-endif()
+# Find Eigen3 package
+find_package(Eigen3 REQUIRED)
+
+# Link against Eigen (header-only, so no linking needed, but good practice)
+target_link_libraries(GameMath INTERFACE Eigen3::Eigen) # If Eigen was a library
