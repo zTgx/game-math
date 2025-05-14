@@ -16,7 +16,3 @@ target_link_libraries(test_GameMath
 # Register as test
 enable_testing()
 add_test(NAME test_GameMath COMMAND test_GameMath)
-
-# Find Eigen3 package
-find_package(Eigen3 REQUIRED)
-target_link_libraries(test_GameMath PUBLIC Eigen3::Eigen) # If Eigen was a library

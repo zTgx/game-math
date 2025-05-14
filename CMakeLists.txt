@@ -15,9 +15,3 @@ if(BUILD_TESTS)
     enable_testing()
     add_subdirectory(tests)
 endif()
-
-# Find Eigen3 package
-find_package(Eigen3 REQUIRED)
-
-# Link against Eigen (header-only, so no linking needed, but good practice)
-target_link_libraries(GameMath INTERFACE Eigen3::Eigen) # If Eigen was a library
